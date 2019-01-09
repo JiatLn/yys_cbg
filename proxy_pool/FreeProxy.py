@@ -36,12 +36,8 @@ def getHtmlTree(url):
     :param kwargs:
     :return:
     """
-
-
-
     # delay 2s for per request
     time.sleep(2)
-
     html = requests.get(url=url).content
     return etree.HTML(html)
 

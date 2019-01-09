@@ -1,17 +1,19 @@
 ﻿import sys
 from random import randint
 from time import sleep
+import pickle
 
 
 from proxy_pool.FreeProxy import freeProxy, valVer
-from yys_cbg import get_serverid_and_game_ordersn
+from yys_cbg import get_serverid_and_game_ordersn, get_detail_json
+from load_items import load_bodys
 
 
 detail_url = 'https://yys.cbg.163.com/cgi/api/get_equip_detail'
 
 
 
-if __name__ == '__main__':
+def fun():
     # 账号列表
     items = []
     # 免费代理列表
@@ -29,7 +31,7 @@ if __name__ == '__main__':
         items += get_serverid_and_game_ordersn(i + 1)
         print('已爬取了%d条记录..' % len(items))
         if len(items) == 45:
-            with open('/output/items-%d.txt' % page, 'a') as f:
+            with open('output/items-%d.txt' % page, 'a') as f:
                 f.write(str(items))
                 page += 1
                 items = []
@@ -37,3 +39,25 @@ if __name__ == '__main__':
                 sleep(300)
 
 
+
+
+if __name__ == '__main__':
+    bodys = []
+    for i in range(121):
+        bodys += load_bodys(i)
+    for i in range(len(bodys)):
+        print('爬取进度{}/{}...'.format((i + 1), len(bodys)))
+        get_detail_json(bodys[i])
+        print("Let me sleep for 61 seconds.")
+        sleep(61)
+    # with open("bodys.pkl", "wb") as f:
+    #     pickle.dump(bodys, f)
+
+
+
+'''
+镰辉樱火切       镰樱白珠鹿
+镰樱X火切        镰樱白珠花
+镰樱雨火切       镰樱白珠鹿
+镰辉[兵/猪]切    镰樱白[雨:薙魂]
+'''
