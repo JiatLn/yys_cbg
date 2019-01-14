@@ -48,8 +48,8 @@ if __name__ == '__main__':
     for i in range(len(bodys)):
         print('爬取进度{}/{}...'.format((i + 1), len(bodys)))
         get_detail_json(bodys[i])
-        print("Let me sleep for 61 seconds.")
-        sleep(61)
+        print("Let me sleep for 301 seconds.")
+        sleep(301)
     # with open("bodys.pkl", "wb") as f:
     #     pickle.dump(bodys, f)
 
